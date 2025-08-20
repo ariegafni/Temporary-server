@@ -20,10 +20,12 @@ function toUserDto(user: any): User {
     bio: user.bio,
     social_links: user.social_links,
     is_verified: user.is_verified,
+    is_host: user.is_host,  
     created_at: user.created_at,
     updated_at: user.updated_at,
   };
 }
+
 
 export class UserManager {
   static async getCurrentUser(userId: string) {

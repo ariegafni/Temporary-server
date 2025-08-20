@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 export interface Host {
   country_place_id: string;
   city_place_id: string;
@@ -13,9 +14,11 @@ export interface Host {
   is_always_available: boolean;
   available?: boolean;
   photo_url?: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
+  user: mongoose.Types.ObjectId | string;
 }
+
 
 export interface CreateHostRequest extends Host {}
 

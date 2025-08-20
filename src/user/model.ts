@@ -15,6 +15,7 @@ export interface IUser extends Document {
   bio?: string;
   social_links?: SocialLink[];
   is_verified: boolean;
+  is_host: boolean;
   created_at: Date;
   updated_at: Date;
   settings: {
@@ -52,6 +53,7 @@ const UserSchema = new Schema<IUser>(
     bio: { type: String },
     social_links: [SocialLinkSchema],
     is_verified: { type: Boolean, default: false },
+    is_host: { type: Boolean, default: false }, 
     settings: {
       email_notifications: { type: Boolean, default: true },
       push_notifications: { type: Boolean, default: true },

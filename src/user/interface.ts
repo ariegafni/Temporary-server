@@ -13,6 +13,7 @@ export interface User {
   bio?: string;
   social_links?: SocialLink[];
   is_verified: boolean;
+  is_host: boolean;
   created_at: string;
   updated_at: string;
 }

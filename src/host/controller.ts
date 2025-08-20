@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { HostManager } from "./manager";
+import { AuthRequest } from "../auth/authMiddleware";
 
 export class HostController {
   static async getAllHosts(req: Request, res: Response) {
@@ -14,15 +15,32 @@ export class HostController {
     res.json(await HostManager.getHostById(req.params.id));
   }
 
-  static async createHost(req: Request, res: Response) {
-    res.json(await HostManager.createHost(req.body));
+  static async getMyHost(req: AuthRequest, res: Response) {
+    const userId = req.user!.id;
+    const host = await HostManager.getHostByUserId(userId);
+    if (!host) return res.status(404).json({ message: "Host not found" });
+    res.json(host);
   }
 
-  static async updateHost(req: Request, res: Response) {
-    res.json(await HostManager.updateHost({ id: req.params.id, ...req.body }));
+  static async createHost(req: AuthRequest, res: Response) {
+    const userId = req.user!.id;
+    const host = await HostManager.createHost(userId, req.body);
+    res.json(host);
   }
 
-  static async deleteHost(req: Request, res: Response) {
-    res.json(await HostManager.deleteHost(req.params.id));
+  static async updateHost(req: AuthRequest, res: Response) {
+    const userId = req.user!.id;
+    const updated = await HostManager.updateHost({
+      id: req.params.id,
+      userId,
+      ...req.body,
+    });
+    res.json(updated);
+  }
+
+  static async deleteHost(req: AuthRequest, res: Response) {
+    const userId = req.user!.id;
+    await HostManager.deleteHost(req.params.id, userId);
+    res.json({ message: "Host deleted" });
   }
 }
