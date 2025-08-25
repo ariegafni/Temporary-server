@@ -15,5 +15,9 @@ router.get(
   authMiddleware,
   HostingRequestController.getMyHostRequests
 );
+router.put("/:id/respond", authMiddleware, HostingRequestController.respondToHostingRequest);
+router.put("/:id/cancel", authMiddleware, HostingRequestController.cancelHostingRequest);
+router.delete("/:id", authMiddleware, HostingRequestController.deleteHostingRequest);
+
 
 export default router;

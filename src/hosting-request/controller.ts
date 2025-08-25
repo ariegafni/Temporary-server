@@ -33,9 +33,38 @@ export const HostingRequestController = {
         req.user!.id,
         req.query
       );
-      console.log(requests);
-
       res.json(requests);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  },
+
+  async respondToHostingRequest(req: AuthRequest, res: Response) {
+    try {
+      const updated = await HostingRequestManager.respondToHostingRequest(
+        req.params.id,
+        req.body.status,
+        req.body.response_message
+      );
+      res.json(updated);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  },
+
+  async cancelHostingRequest(req: AuthRequest, res: Response) {
+    try {
+      const cancelled = await HostingRequestManager.cancelHostingRequest(req.params.id, req.user!.id);
+      res.json(cancelled);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  },
+
+  async deleteHostingRequest(req: AuthRequest, res: Response) {
+    try {
+      await HostingRequestManager.deleteHostingRequest(req.params.id);
+      res.json({ message: "Hosting request deleted" });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
