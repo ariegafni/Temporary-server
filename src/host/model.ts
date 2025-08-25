@@ -19,7 +19,7 @@ const HostSchema = new Schema<HostDocument>(
     is_always_available: { type: Boolean, default: false },
     available: { type: Boolean, default: true },
     photo_url: String,
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true }
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );

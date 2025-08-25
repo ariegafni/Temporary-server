@@ -4,20 +4,24 @@ import { UserModel } from "../user/model";
 
 export class HostManager {
   static async getAllHosts() {
-    return await HostModel.find();
-  }
+  return await HostModel.find()
+    .populate("user", "first_name last_name profile_image");
+}
 
-  static async getHostsByCountry(country_place_id: string) {
-    return await HostModel.find({ country_place_id });
-  }
+ static async getHostsByCountry(country_place_id: string) {
+  return await HostModel.find({ country_place_id })
+    .populate("user", "first_name last_name profile_image");
+}
 
   static async getHostById(id: string) {
-    return await HostModel.findById(id);
-  }
+  return await HostModel.findById(id)
+    .populate("user", "first_name last_name profile_image");
+}
 
   static async getHostByUserId(userId: string) {
-    return await HostModel.findOne({ user: userId });
-  }
+  return await HostModel.findOne({ user: userId })
+    .populate("user", "first_name last_name profile_image");
+}
 
   static async createHost(userId: string, data: CreateHostRequest) {
     const host = await HostModel.create({ ...data, user: userId });
