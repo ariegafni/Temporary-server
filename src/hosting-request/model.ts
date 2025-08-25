@@ -25,6 +25,20 @@ const HostingRequestSchema = new Schema<HostingRequestDocument>(
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
 
+HostingRequestSchema.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
+  transform: (_, ret: any) => {
+    ret.id = ret._id.toString();
+    ret.guest_id = ret.guest?.toString?.() || ret.guest;
+    ret.host_id = ret.host?.toString?.() || ret.host;
+    delete ret._id;
+    delete ret.guest;
+    delete ret.host;
+  },
+});
+
+
 export const HostingRequestModel = model<HostingRequestDocument>(
   "HostingRequest",
   HostingRequestSchema

@@ -33,6 +33,8 @@ export const HostingRequestController = {
         req.user!.id,
         req.query
       );
+      console.log(requests);
+
       res.json(requests);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
