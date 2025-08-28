@@ -16,7 +16,8 @@ app.use(
       "http://localhost:3002",
       "http://127.0.0.1:3002",
       "http://10.0.2.2:3005",
-      "capacitor://localhost"
+      "capacitor://localhost",
+      "https://temporary-server.onrender.com"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
