@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import { LocationsManager } from "./manager";
 
 export class LocationsController {
-  static async getCountries(req: Request, res: Response) {
-    res.json(await LocationsManager.getCountries());
-  }
+ static async getCountriesWithHosts(req: Request, res: Response) {
+  res.json(await LocationsManager.getCountriesWithHosts());
+}
+
 
   static async getCitiesByCountry(req: Request, res: Response) {
     res.json(await LocationsManager.getCitiesByCountry(req.params.country_place_id));

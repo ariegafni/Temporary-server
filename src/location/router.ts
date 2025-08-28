@@ -3,7 +3,7 @@ import { LocationsController } from "./controller";
 
 const router = Router();
 
-router.get("/countries", LocationsController.getCountries);
+router.get("/countries", LocationsController.getCountriesWithHosts);
 router.get("/cities/country/:country_place_id", LocationsController.getCitiesByCountry);
 router.get("/search", LocationsController.search);
 router.get("/reverse-geocode", LocationsController.reverseGeocode);
